@@ -88,6 +88,7 @@ NTSTATUS ReqCreateClose(PDEVICE_OBJECT, PIRP Irp)
 NTSTATUS ChangeThreadPriority(PDEVICE_OBJECT, PIRP Irp)
 {
 	AUTO_MACRO();
+
 	NTSTATUS status = STATUS_UNSUCCESSFUL;
 	auto stack = IoGetCurrentIrpStackLocation(Irp);
 

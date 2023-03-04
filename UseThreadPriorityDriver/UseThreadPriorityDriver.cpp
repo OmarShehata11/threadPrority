@@ -26,14 +26,16 @@ int main(int argc, char ** argv)
 
 	cout << "handle opened succefuly with value of : " << hDevice << endl;
 
-	PriorityData* Data = { 0 };
-	Data->hThread = OpenThread(THREAD_SET_INFORMATION, TRUE, atoi(argv[1]));
-	if (Data->hThread == INVALID_HANDLE_VALUE)
+	PriorityData Data;
+	Data.hThread = OpenThread(THREAD_SET_INFORMATION, FALSE, atoi(argv[1]));
+	
+	if (Data.hThread == NULL)
 		Error();
 
-	Data->newPriority = atoi(argv[2]);
+	Data.newPriority = atoi(argv[2]);
 
 	DWORD bytesReturend;
+
 	int success = DeviceIoControl(hDevice, IOCTL_THREAD_PRIORITY, &Data, sizeof(Data), nullptr, 0, &bytesReturend, nullptr);
 	
 	if (!success)
